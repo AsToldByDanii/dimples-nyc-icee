@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DIMPLES NYC-iCEE — NYC's coolest frozen treat. Bold flavors, big vibes. Available for pop-ups, events, parties & markets." />
+  <meta name="keywords" content="DIMPLES NYC iCEE, Italian ice NYC, frozen treats NYC, NYC pop-up food, summer events NYC" />
+  <meta property="og:title" content="DIMPLES NYC-iCEE" />
+  <meta property="og:description" content="NYC Style Italian iCEEs — Bold Flavors, Big Vibes." />
+  <meta property="og:image" content="images/logo.png" />
+  <title>DIMPLES NYC-iCEE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Boogaloo&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =====================
+       RESET & ROOT
+    ===================== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --raspberry: #FF3FA4;
+      --raspberry-dark: #CC1F7A;
+      --lemon: #FFE600;
+      --mango: #FF8C00;
+      --electric: #00B4FF;
+      --cherry: #E8003D;
+      --purple: #6B2FD9;
+      --black: #08080A;
+      --black-soft: #111114;
+      --black-card: #16161A;
+      --white: #FFFFFF;
+      --text-muted: rgba(255,255,255,0.55);
+      --text-soft: rgba(255,255,255,0.8);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button { cursor: pointer; font-family: inherit; }
+
+    /* =====================
+       BRICK TEXTURE UTILITY
+    ===================== */
+    .brick-texture {
+      position: relative;
+      overflow: hidden;
+    }
+    .brick-texture::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/brick-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      opacity: 0.55;
+      z-index: 0;
+    }
+    .brick-texture > * { position: relative; z-index: 1; }
+
+    /* =====================
+       MARQUEE
+    ===================== */
+    .marquee-wrap {
+      background: var(--raspberry);
+      overflow: hidden;
+      padding: 0.55rem 0;
+      border-bottom: 2px solid var(--raspberry-dark);
+    }
+    .marquee-inner {
+      display: flex;
+      width: max-content;
+      animation: marquee 20s linear infinite;
+    }
+    .marquee-inner:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-item {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem;
+      color: white;
+      letter-spacing: 2px;
+      padding: 0 1.5rem;
+      white-space: nowrap;
+    }
+    .marquee-sep { color: var(--lemon); }
+
+    /* =====================
+       NAV
+    ===================== */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      background: rgba(8, 8, 10, 0.96);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 2px solid var(--raspberry);
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .nav-brand img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 8px rgba(255,63,164,0.5));
+    }
+    .nav-brand-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.2rem;
+      color: var(--raspberry);
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+    .nav-brand-text span { color: var(--electric); }
+    .nav-links {
+      display: flex;
+      gap: 0.25rem;
+      list-style: none;
+    }
+    .nav-links li a {
+      display: block;
+      font-weight: 800;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      padding: 0.5rem 1.1rem;
+      border-radius: 50px;
+      color: rgba(255,255,255,0.8);
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links li a:hover,
+    .nav-links li a.active {
+      background: var(--raspberry);
+      color: white;
+    }
+
+    /* Mobile nav */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px;
+      height: 2px;
+      background: white;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* =====================
+       PAGES
+    ===================== */
+    .page { display: none; }
+    .page.active { display: block; }
+
+    /* =====================
+       HOME — HERO
+    ===================== */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      background: #1a1a1a;
+    }
+    /* Brick wall — clearly visible */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/brick-bg.png');
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      opacity: 1;
+      z-index: 0;
+    }
+    /* Subtle dark tint so text & logo stay readable */
+    .hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.52);
+      z-index: 1;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 3rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      animation: fadeUp 0.9s ease both;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(32px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-logo {
+      width: 320px;
+      height: 320px;
+      object-fit: contain;
+      margin: 0 auto 1.75rem;
+      display: block;
+      filter: drop-shadow(0 0 50px rgba(255,63,164,0.85))
+              drop-shadow(0 8px 24px rgba(0,0,0,0.8));
+      animation: float 3.5s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(-1deg); }
+      50%       { transform: translateY(-16px) rotate(1deg); }
+    }
+    .hero-eyebrow {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--electric);
+      margin-bottom: 0.75rem;
+    }
+    .hero-title {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.6rem, 8vw, 5rem);
+      line-height: 1.05;
+      color: white;
+      text-shadow: 4px 4px 0 var(--raspberry), 8px 8px 0 rgba(0,0,0,0.4);
+      margin-bottom: 0.5rem;
+    }
+    .hero-title .hl-yellow {
+      color: var(--lemon);
+      text-shadow: 4px 4px 0 var(--mango), 8px 8px 0 rgba(0,0,0,0.4);
+    }
+    .hero-sub {
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      margin-bottom: 2.5rem;
+    }
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.85rem 2.2rem;
+      border-radius: 50px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      letter-spacing: 1px;
+      border: none;
+      transition: transform 0.18s, box-shadow 0.18s;
+    }
+    .btn:hover { transform: translate(-2px, -3px); }
+    .btn-pink {
+      background: var(--raspberry);
+      color: white;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.45);
+    }
+    .btn-pink:hover { box-shadow: 7px 7px 0 rgba(0,0,0,0.45); }
+    .btn-outline {
+      background: transparent;
+      color: white;
+      border: 2px solid rgba(255,255,255,0.7);
+      box-shadow: none;
+    }
+    .btn-outline:hover {
+      background: white;
+      color: var(--black);
+      border-color: white;
+    }
+
+    /* UPCOMING EVENT BAND */
+    .event-band {
+      background: var(--lemon);
+      padding: 0.9rem 2rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .event-band:hover { background: #f0d800; }
+    .event-band-label {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.8rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: rgba(0,0,0,0.55);
+    }
+    .event-band-text {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.05rem;
+      color: var(--black);
+      letter-spacing: 1px;
+    }
+    .event-band-arrow {
+      font-size: 1.1rem;
+      color: var(--raspberry);
+    }
+
+    /* FLAVORS */
+    .section-flavors {
+      background: var(--black-soft);
+      padding: 5rem 2rem;
+    }
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--lemon);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.4rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+    .flavors-row {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+      max-width: 920px;
+      margin: 0 auto;
+    }
+    .flavor-pill {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.7rem 1.4rem;
+      border-radius: 50px;
+      border: 2px solid rgba(255,255,255,0.1);
+      transition: transform 0.2s, border-color 0.2s;
+    }
+    .flavor-pill:hover { transform: translateY(-4px) scale(1.04); }
+    .flavor-pill .fp-emoji { font-size: 1.4rem; }
+    .flavor-pill .fp-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .fp-cherry  { background:#1e0008; color:#FF6B8A; border-color:#3a0015; }
+    .fp-lemon   { background:#1e1a00; color:#FFE600; border-color:#3a3000; }
+    .fp-coconut { background:#0a1e1e; color:#7FFFEF; border-color:#0f3333; }
+    .fp-mango   { background:#1e0e00; color:#FFAE40; border-color:#3a2000; }
+    .fp-raspberry { background:#1e0015; color:#FF3FA4; border-color:#3a0028; }
+    .fp-rainbow { background:#0f0f1e; color:#C77DFF; border-color:#1f1f40; }
+
+    /* VIBE SECTION */
+    .section-vibe {
+      position: relative;
+      padding: 5rem 2rem;
+      overflow: hidden;
+      background: var(--black);
+    }
+    .section-vibe::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/brick-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      opacity: 0.55;
+    }
+    .section-vibe::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,10,0.68);
+    }
+    .vibe-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .vibe-inner h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      color: var(--raspberry);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1rem;
+    }
+    .vibe-inner p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-soft);
+      max-width: 640px;
+      margin: 0 auto 2rem;
+    }
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      justify-content: center;
+    }
+    .tag {
+      padding: 0.45rem 1.1rem;
+      border-radius: 50px;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+    }
+    .tag-pink   { background: var(--raspberry); color: white; }
+    .tag-yellow { background: var(--lemon);     color: var(--black); }
+    .tag-blue   { background: var(--electric);  color: var(--black); }
+    .tag-orange { background: var(--mango);     color: var(--black); }
+    .tag-white  { background: white;            color: var(--black); }
+    .tag-purple { background: var(--purple);    color: white; }
+
+    /* =====================
+       EVENTS PAGE
+    ===================== */
+    .page-header {
+      background: var(--black-soft);
+      padding: 3.5rem 2rem 3rem;
+      text-align: center;
+      border-bottom: 3px solid var(--raspberry);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/brick-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      opacity: 0.5;
+    }
+    .page-header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,10,0.72);
+    }
+    .page-header h1,
+    .page-header p { position: relative; z-index: 1; }
+    .page-header h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      color: var(--lemon);
+      text-shadow: 3px 3px 0 var(--mango);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .page-header p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+    }
+
+    .events-body {
+      background: var(--black);
+      padding: 4rem 2rem;
+      min-height: 60vh;
+    }
+    .events-inner { max-width: 960px; margin: 0 auto; }
+
+    .section-label {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.4rem;
+      color: var(--raspberry);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 1.75rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 2px dashed rgba(255,63,164,0.25);
+    }
+
+    /* UPCOMING EVENT CARD */
+    .upcoming-event-card {
+      background: var(--black-card);
+      border: 2px solid var(--raspberry);
+      border-radius: 20px;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      margin-bottom: 3.5rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .upcoming-event-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(255,63,164,0.2);
+    }
+    .event-flyer-wrap {
+      overflow: hidden;
+      max-height: 460px;
+    }
+    .event-flyer-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .event-details {
+      padding: 2.5rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 1.2rem;
+    }
+    .event-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--raspberry);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.8rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 0.35rem 1rem;
+      border-radius: 50px;
+      width: fit-content;
+      animation: pulse-badge 2s ease-in-out infinite;
+    }
+    @keyframes pulse-badge {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(255,63,164,0.5); }
+      50%       { box-shadow: 0 0 0 8px rgba(255,63,164,0); }
+    }
+    .event-badge .dot {
+      width: 7px; height: 7px;
+      background: var(--lemon);
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .event-details h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.9rem;
+      line-height: 1.1;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .event-details h3 span { color: var(--lemon); }
+    .event-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+    }
+    .event-meta-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.6rem;
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      font-weight: 600;
+    }
+    .event-meta-row .icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+    .event-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--lemon);
+      color: var(--black);
+      font-family: 'Fredoka One', cursive;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      padding: 0.75rem 1.75rem;
+      border-radius: 50px;
+      border: none;
+      width: fit-content;
+      transition: transform 0.18s, box-shadow 0.18s;
+      box-shadow: 3px 3px 0 rgba(0,0,0,0.4);
+    }
+    .event-cta:hover {
+      transform: translate(-2px,-3px);
+      box-shadow: 6px 6px 0 rgba(0,0,0,0.4);
+    }
+
+    /* EVENT TYPE CARDS */
+    .event-types-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .event-type-card {
+      background: var(--black-card);
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
+    }
+    .event-type-card:hover {
+      border-color: var(--raspberry);
+      transform: translateY(-5px);
+    }
+    .etc-img {
+      background: #0a0a0d;
+      padding: 1.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .etc-img img {
+      width: 80px;
+      height: 80px;
+      object-fit: contain;
+      opacity: 0.85;
+    }
+    .etc-body { padding: 1.25rem 1.5rem 1.5rem; flex: 1; }
+    .etc-body h3 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.15rem;
+      color: white;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 0.4rem;
+    }
+    .etc-body p {
+      font-size: 0.88rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+    }
+
+    /* =====================
+       CONTACT PAGE
+    ===================== */
+    .contact-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 2rem 3rem;
+      text-align: center;
+      background: var(--black);
+    }
+    .contact-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url('images/brick-bg.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: repeat;
+      opacity: 0.55;
+    }
+    .contact-hero::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(8,8,10,0.72);
+    }
+    .contact-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+    .contact-hero h1 {
+      font-family: 'Fredoka One', cursive;
+      font-size: clamp(2.2rem, 6vw, 3.5rem);
+      color: var(--electric);
+      text-shadow: 3px 3px 0 rgba(0,0,0,0.6);
+      text-transform: uppercase;
+      letter-spacing: 3px;
+    }
+    .contact-hero p {
+      color: var(--text-muted);
+      font-size: 1rem;
+      margin-top: 0.5rem;
+      font-weight: 600;
+    }
+
+    .contact-body {
+      background: var(--black);
+      padding: 4rem 2rem;
+      min-height: 60vh;
+    }
+    .contact-inner { max-width: 900px; margin: 0 auto; }
+
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+    .contact-card {
+      background: var(--black-card);
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .contact-card:hover {
+      border-color: var(--electric);
+      transform: translateY(-5px);
+    }
+    .cc-img-wrap {
+      background: #0a0a0d;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cc-img-wrap img {
+      width: 72px;
+      height: 72px;
+      object-fit: contain;
+      opacity: 0.88;
+    }
+    .cc-body { padding: 1.25rem 1.5rem 1.5rem; text-align: center; flex: 1; }
+    .cc-label {
+      font-family: 'Fredoka One', cursive;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.35);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      margin-bottom: 0.4rem;
+    }
+    .cc-value {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--white);
+      word-break: break-all;
+    }
+    .cc-value a {
+      color: var(--electric);
+      transition: color 0.2s;
+    }
+    .cc-value a:hover { color: var(--raspberry); }
+
+    /* BOOKING BLOCK */
+    .booking-block {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+      background: var(--black-card);
+      border: 2px solid var(--raspberry);
+      border-radius: 24px;
+      padding: 2.75rem 2rem;
+    }
+    .booking-logo-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .booking-logo-row img {
+      width: 56px;
+      height: 56px;
+      object-fit: contain;
+    }
+    .booking-block h2 {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.7rem;
+      color: var(--raspberry);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .booking-block p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.75;
+      margin: 0.75rem 0 1.75rem;
+    }
+    .btn-book {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--raspberry);
+      color: white;
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      letter-spacing: 1px;
+      padding: 1rem 2.5rem;
+      border-radius: 50px;
+      border: none;
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.5);
+      transition: transform 0.18s, box-shadow 0.18s, background 0.18s;
+      text-decoration: none;
+    }
+    .btn-book:hover {
+      transform: translate(-2px,-3px);
+      box-shadow: 7px 7px 0 rgba(0,0,0,0.5);
+      background: var(--raspberry-dark);
+    }
+    .booking-note {
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 1px;
+    }
+
+    /* =====================
+       FOOTER
+    ===================== */
+    footer {
+      background: #050507;
+      border-top: 3px solid var(--raspberry);
+      text-align: center;
+      padding: 2.5rem 2rem;
+    }
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 0.75rem;
+    }
+    .footer-brand img {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      opacity: 0.85;
+    }
+    .footer-brand-name {
+      font-family: 'Fredoka One', cursive;
+      font-size: 1.1rem;
+      color: var(--raspberry);
+    }
+    .footer-brand-name span { color: var(--electric); }
+    .footer-tagline {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 0.5rem;
+      letter-spacing: 1px;
+    }
+    .footer-contact {
+      font-size: 0.85rem;
+      color: rgba(255,255,255,0.35);
+    }
+    .footer-contact a { color: var(--electric); }
+    .footer-contact a:hover { color: var(--raspberry); }
+
+    /* =====================
+       RESPONSIVE
+    ===================== */
+    @media (max-width: 720px) {
+      nav { padding: 0 1.25rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(8,8,10,0.98); border-bottom: 2px solid var(--raspberry); padding: 1rem; gap: 0.25rem; }
+      .nav-links.open { display: flex; }
+      .nav-links li a { border-radius: 10px; padding: 0.65rem 1rem; }
+      .nav-toggle { display: flex; }
+
+      .upcoming-event-card { grid-template-columns: 1fr; }
+      .event-flyer-wrap { max-height: 300px; }
+      .event-details { padding: 1.75rem 1.5rem; }
+
+      .hero-logo { width: 240px; height: 240px; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-ctas { flex-direction: column; align-items: center; }
+      .booking-block { padding: 2rem 1.25rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- MARQUEE -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-item">🍒 CHERRY</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🍋 LEMON</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🥥 COCONUT</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🥭 MANGO</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🍓 RASPBERRY</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🌈 RAINBOW</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🍒 CHERRY</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🍋 LEMON</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🥥 COCONUT</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🥭 MANGO</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🍓 RASPBERRY</span><span class="marquee-item marquee-sep">✦</span>
+      <span class="marquee-item">🌈 RAINBOW</span><span class="marquee-item marquee-sep">✦</span>
+    </div>
+  </div>
+
+  <!-- NAV -->
+  <nav role="navigation" aria-label="Main navigation">
+    <div class="nav-brand">
+      <img src="images/logo.png" alt="DIMPLES NYC-iCEE logo" />
+      <div class="nav-brand-text">DIMPLES <span>NYC-iCEE</span></div>
+    </div>
+    <button class="nav-toggle" aria-label="Toggle navigation" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#" class="active" onclick="showPage('home', this); closeNav(); return false;">Home</a></li>
+      <li><a href="#" onclick="showPage('events', this); closeNav(); return false;">Events</a></li>
+      <li><a href="#" onclick="showPage('contact', this); closeNav(); return false;">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- ========================
+       HOME PAGE
+  ========================= -->
+  <main id="page-home" class="page active">
+
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="hero-content">
+        <img src="images/logo.png" alt="DIMPLES NYC-iCEE" class="hero-logo" />
+        <p class="hero-eyebrow">NYC Style Italian iCEEs</p>
+        <h1 class="hero-title"><span class="hl-yellow">NYC's</span> Coolest<br>Frozen Treat 🧊</h1>
+        <p class="hero-sub">Pop-Ups &nbsp;·&nbsp; Events &nbsp;·&nbsp; Markets &nbsp;·&nbsp; Parties</p>
+        <div class="hero-ctas">
+          <button class="btn btn-pink" onclick="showPage('events', document.querySelector('#navLinks a:nth-child(1)'))">🎪 See Events</button>
+          <button class="btn btn-outline" onclick="showPage('contact', document.querySelector('#navLinks a:nth-child(1)'))">📋 Book Us</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- UPCOMING EVENT BAND -->
+    <div class="event-band" onclick="showPage('events', null)" role="button" tabindex="0" aria-label="View upcoming event">
+      <span class="event-band-label">🔥 Upcoming</span>
+      <span class="event-band-text">First Event — Sunday, May 24 &nbsp;|&nbsp; 8AM–2PM &nbsp;|&nbsp; Long Family Markets</span>
+      <span class="event-band-arrow">→</span>
+    </div>
+
+    <!-- FLAVORS -->
+    <section class="section-flavors" aria-label="Flavor lineup">
+      <div class="section-header">
+        <h2>🌈 Pick Your Flavor</h2>
+        <p>Six bold flavors, zero excuses not to try them all</p>
+      </div>
+      <div class="flavors-row">
+        <div class="flavor-pill fp-cherry"><span class="fp-emoji">🍒</span><span class="fp-name">Cherry</span></div>
+        <div class="flavor-pill fp-lemon"><span class="fp-emoji">🍋</span><span class="fp-name">Lemon</span></div>
+        <div class="flavor-pill fp-coconut"><span class="fp-emoji">🥥</span><span class="fp-name">Coconut</span></div>
+        <div class="flavor-pill fp-mango"><span class="fp-emoji">🥭</span><span class="fp-name">Mango</span></div>
+        <div class="flavor-pill fp-raspberry"><span class="fp-emoji">🍓</span><span class="fp-name">Raspberry</span></div>
+        <div class="flavor-pill fp-rainbow"><span class="fp-emoji">🌈</span><span class="fp-name">Rainbow</span></div>
+      </div>
+    </section>
+
+    <!-- VIBE -->
+    <section class="section-vibe" aria-label="Brand story">
+      <div class="vibe-inner">
+        <h2>More Than Just Ice ❄️</h2>
+        <p>DIMPLES NYC iCEE is an experience. From bold colors and eccentric branding to high-energy event presence — we're designed to stop people in their tracks, spark curiosity, and create moments people want to photograph, share, and come back for.</p>
+        <div class="tags">
+          <span class="tag tag-pink">🌆 NYC Born</span>
+          <span class="tag tag-yellow">⚡ High Energy</span>
+          <span class="tag tag-blue">🎪 Carnival Vibes</span>
+          <span class="tag tag-orange">🌴 Tropical</span>
+          <span class="tag tag-white">📸 Insta-Ready</span>
+          <span class="tag tag-purple">🏆 Main Character</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================
+       EVENTS PAGE
+  ========================= -->
+  <main id="page-events" class="page" aria-label="Events">
+
+    <div class="page-header">
+      <h1>🎪 Events</h1>
+      <p>We show up wherever the fun is — find us near you</p>
+    </div>
+
+    <div class="events-body">
+      <div class="events-inner">
+
+        <div class="section-label">📅 Upcoming Event</div>
+
+        <!-- UPCOMING EVENT CARD -->
+        <div class="upcoming-event-card">
+          <div class="event-flyer-wrap">
+            <img src="images/first-event-flyer.png" alt="DIMPLES NYC-iCEE First Event — Sunday May 24, 8AM-2PM at Long Family Markets, 163 Staffordboro Blvd." />
+          </div>
+          <div class="event-details">
+            <div class="event-badge"><span class="dot"></span> Happening This Sunday!</div>
+            <h3>First <span>Event!</span></h3>
+            <div class="event-meta">
+              <div class="event-meta-row"><span class="icon">📅</span><span>Sunday, May 24, 2025</span></div>
+              <div class="event-meta-row"><span class="icon">⏰</span><span>8:00 AM – 2:00 PM</span></div>
+              <div class="event-meta-row"><span class="icon">📍</span><span>Long Family Markets<br>163 Staffordboro Blvd.</span></div>
+              <div class="event-meta-row"><span class="icon">🍒</span><span>Cherry · Lemon · Coconut · Mango · Raspberry · Rainbow</span></div>
+            </div>
+            <a href="https://maps.google.com/?q=163+Staffordboro+Blvd" target="_blank" rel="noopener" class="event-cta">
+              📍 Get Directions
+            </a>
+          </div>
+        </div>
+
+        <div class="section-label">Where You'll Find Us</div>
+        <div class="event-types-grid">
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🌆 Street Fairs</h3><p>NYC street fairs, block parties, and outdoor markets all summer long.</p></div>
+          </div>
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🎶 Festivals</h3><p>Music festivals, community celebrations, and night markets.</p></div>
+          </div>
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🎂 Private Parties</h3><p>Birthday parties, baby showers, sweet 16s, graduation parties, and more.</p></div>
+          </div>
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🏢 Corporate Events</h3><p>Brand activations, employee appreciation, and company picnics.</p></div>
+          </div>
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🏫 School & Community</h3><p>School events, cookouts, fundraisers, and community gatherings.</p></div>
+          </div>
+          <div class="event-type-card">
+            <div class="etc-img"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="etc-body"><h3>🛍️ Pop-Up Markets</h3><p>Vendor markets, pop-up collabs, and brand activations across the city.</p></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- ========================
+       CONTACT PAGE
+  ========================= -->
+  <main id="page-contact" class="page" aria-label="Contact">
+
+    <div class="contact-hero">
+      <div class="contact-hero-inner">
+        <h1>📲 Contact Us</h1>
+        <p>Ready to bring the cool? Let's talk.</p>
+      </div>
+    </div>
+
+    <div class="contact-body">
+      <div class="contact-inner">
+
+        <div class="contact-cards">
+          <div class="contact-card">
+            <div class="cc-img-wrap"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="cc-body">
+              <div class="cc-label">📞 Phone / Text</div>
+              <div class="cc-value"><a href="tel:5713005039">571-300-5039</a></div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-img-wrap"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="cc-body">
+              <div class="cc-label">📧 Email</div>
+              <div class="cc-value"><a href="mailto:info@dimplescom.com">info@dimplescom.com</a></div>
+            </div>
+          </div>
+          <div class="contact-card">
+            <div class="cc-img-wrap"><img src="images/logo.png" alt="" aria-hidden="true" /></div>
+            <div class="cc-body">
+              <div class="cc-label">📸 Instagram</div>
+              <div class="cc-value"><a href="https://instagram.com/DIMPLES_NYC_iCEE" target="_blank" rel="noopener">@DIMPLES_NYC_iCEE</a></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="booking-block">
+          <div class="booking-logo-row">
+            <img src="images/logo.png" alt="DIMPLES NYC-iCEE" />
+            <h2>Book DIMPLES NYC-iCEE</h2>
+          </div>
+          <p>Ready to bring the flavor to your event? Fill out our booking form and we'll get back to you faster than a brain freeze.</p>
+          <a href="https://form.jotform.com/261418411547152" target="_blank" rel="noopener" class="btn-book">
+            📋 Request a Booking
+          </a>
+          <p class="booking-note">Call · Text · DM — We respond fast!</p>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">
+      <img src="images/logo.png" alt="DIMPLES NYC-iCEE" />
+      <div class="footer-brand-name">DIMPLES <span>NYC-iCEE</span></div>
+    </div>
+    <p class="footer-tagline">NYC's Coolest Frozen Treat · Pop-Ups · Events · Parties</p>
+    <p class="footer-contact">
+      <a href="tel:5713005039">571-300-5039</a> &nbsp;·&nbsp;
+      <a href="mailto:info@dimplescom.com">info@dimplescom.com</a> &nbsp;·&nbsp;
+      <a href="https://instagram.com/DIMPLES_NYC_iCEE" target="_blank" rel="noopener">@DIMPLES_NYC_iCEE</a>
+    </p>
+    <p style="margin-top:1rem; font-size:0.75rem; color:rgba(255,255,255,0.18);">
+      &copy; 2025 DIMPLES NYC-iCEE. All rights reserved.
+    </p>
+  </footer>
+
+  <script>
+    function showPage(id, clickedLink) {
+      // Hide all pages
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      // Remove active from all nav links
+      document.querySelectorAll('#navLinks a').forEach(a => a.classList.remove('active'));
+      // Show selected page
+      const page = document.getElementById('page-' + id);
+      if (page) page.classList.add('active');
+      // Mark nav link active
+      if (clickedLink) clickedLink.classList.add('active');
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleNav() {
+      document.getElementById('navLinks').classList.toggle('open');
+    }
+
+    function closeNav() {
+      document.getElementById('navLinks').classList.remove('open');
+    }
+
+    // Keyboard support for event band
+    document.querySelector('.event-band').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        showPage('events', null);
+      }
+    });
+  </script>
+
+</body>
+</html>
